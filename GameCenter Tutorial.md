@@ -44,9 +44,9 @@ In the name box, enter the name of your app
 
 </br> Under APP ID Suffix, choose Explicit App ID
 
-</br> In the Bundle ID field, enter the bundle identifier of your app 
+</br> In the Bundle ID field, enter the bundle identifier of your app. This can be found in Xcode in the following location:
+![](Screenshots/Screen Shot 2015-07-20 at 3.32.53 PM.png)
 
-</br> This can be found in Xcode in the following location:
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.47 AM.png)
 Make sure you have GameCenter selected before clicking continue. If you're going to be adding in any other 
@@ -54,53 +54,43 @@ features such as In-app purchases, click those.
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.54 AM.png)
 Check to make sure that everything is how you want it, and click Continue.
+
+Awesome! You're all done. Now let's move on to iTunes Connect.
 	
 
-##2. Developer Center
+##2. iTunes Connect
+iTunes Connect has a much cleaner interface than the iOS Developer Center, and tends to be a much nicer experience to use, which is good because you should expect to use iTunes Connect much more often. Get started by following [this link.](https://itunesconnect.apple.com/)
 
 
+![](Screenshots/Screen Shot 2015-07-20 at 4.30.18 PM.png)
+Begin by signing into your Developer Account. (Yes, mine is fabio13. I made it in 2005. I was 15. It was middle school. Let's move on)
 
-#Just regular Markdown
+![](Screenshots/Screen Shot 2015-07-20 at 4.30.40 PM.png)
+Click My Apps
 
-Content...
-
-#Additional Support
-
-We also support:
-
-Action Highlights:
-
-> [action]
-> Add the following import statement to the top of _TimelineViewController.swift_:
->
->
-    import ConvenienceKit
-
-Info Boxes:
-> [info]
-> You should be careful
-because of X, Y and Z
-
-And hidden solutions:
-
-> [solution]
-> This is how it would have worked!
-
-Enumerations should look beautiful, too:
-
-1. Is this good?
-2. Or not?
-3. Huh?
+![](Screenshots/Screen Shot 2015-07-20 at 4.31.11 PM.png)
+Click the plus, then click New iOS App
 
 
----
-title: "Move on with this tutorial!"
-slug: tutorial-page-2
----     
+![](Screenshots/Screen Shot 2015-07-20 at 4.32.26 PM.png)
+Fill in the fields.
 
-#Just regular Markdown
+![](Screenshots/Screen Shot 2015-07-20 at 4.32.32 PM.png)
+Click GameCenter
 
-Content...
+![](Screenshots/Screen Shot 2015-07-20 at 5.07.04 PM.png)
+Enable GameCenter for a single game (unless you're feeling ambitious and have multiple games)
+
+![](Screenshots/Screen Shot 2015-07-20 at 5.07.27 PM.png)
+Add Leaderboard
+
+![](Screenshots/Screen Shot 2015-07-20 at 5.09.00 PM.png)
+Choose Single Leaderboard
+
+![](Screenshots/Screen Shot 2015-07-20 at 5.10.37 PM.png)
+Fill in the fields. For Score format point, it should be fairly straightforward which you should pick on your game, based on what your player earns in game (points, dollars, etc.)
+
+![](Screenshots/Screen Shot 2015-07-20 at 5.12.39 PM.png)
 
 
-
+![](Screenshots/Screen Shot 2015-07-20 at 5.19.54 PM.png)
