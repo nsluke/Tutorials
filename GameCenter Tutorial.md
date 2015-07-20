@@ -37,17 +37,26 @@ Click "Certificates, Identifiers, and Profiles"
 Under iOS Apps, Click "Identifiers"
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.09 AM.png)
-Next 
+Click on the plus button in the top right corner
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.43 AM.png)
+In the name box, enter the name of your app
+
+</br> Under APP ID Suffix, choose Explicit App ID
+
+</br> In the Bundle ID field, enter the bundle identifier of your app 
+
+</br> This can be found in Xcode in the following location:
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.47 AM.png)
+Make sure you have GameCenter selected before clicking continue. If you're going to be adding in any other 
+features such as In-app purchases, click those.
 
 ![](Screenshots/Screen Shot 2015-07-20 at 11.25.54 AM.png)
-
+Check to make sure that everything is how you want it, and click Continue.
 	
 
-
+##2. Developer Center
 
 
 
