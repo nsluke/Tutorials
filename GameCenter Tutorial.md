@@ -279,4 +279,27 @@ Next, go to File->New->File. Now select iOS Source->Swift File-> Next. Save the 
 ### 7.	
 Now it's time to add the code that authenticates the user into GameCenter. First things first, I want you to pick up your iPhone/iPod/iPad and press the home button. Now go to Settings->GameCenter->Developer and turn Sandbox on.
 
+![](Screenshots/IMG_6848.jpg)
+
+### 8. 
+If you've been wildly copying code and haven't been doing much thinking, now is the time to slow down.
+
+    func didLoadFromCCB() {
+        setUpGameCenter()
+    }
+    
+    func setUpGameCenter() {
+        
+        let gameCenterInteractor = GameCenterInteractor.sharedInstance
+        gameCenterInteractor.authenticationCheck()
+        
+    }
+
+Did you wildly copy those methods into your code? Well I hope you're enjoying the errors you probably have. 
+
+Now is the time for you to take this code I've written and understand it. In your didLoadFromCCB class, you should put the line 
+
+	setUpGameCenter() 
+	
+Which is a method that you should have written in your class extension (remember that thing we did up above?) 
 
