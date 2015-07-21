@@ -20,7 +20,7 @@ GameCenter integration is broken down into 3 steps:
 ##1. Developer Center
 If you've never used the iOS developer center before, it can be a little intimidating. Don't fret, I'll carefully walk you through this trecherous, dated-looking website. Did I mention you should have a developer account by now? 
 
-#### Please Note: 
+#### Please Note: If you've already set up your app in the iOS Developer Center, feel free to skip to the next section.
 
 [Lets get started. Click here to go to the iOS Developer Center.](https://developer.apple.com/membercenter/)
 
@@ -126,7 +126,7 @@ The next step is to add the GameKit framework into your app. Start by clicking o
 ![](Screenshots/Screen Shot 2015-07-21 at 8.47.21 AM.png)
 
 ### 2.
-Click the plus button.
+Click the plus button next to "Drag to reorder frameworks."
 ![](Screenshots/Screen Shot 2015-07-21 at 8.47.34 AM.png)
 
 ### 3.
@@ -156,6 +156,127 @@ Now, we're going to add the following code as an extension to your class. You ha
 	    }
     
 	}
+These are methods that we inherit from the GKGameCenterControllerDelegate. 
+
 ![](Screenshots/Screen Shot 2015-07-21 at 8.48.56 AM.png)
 
 ### 6.
+Next, go to File->New->File. Now select iOS Source->Swift File-> Next. Save the file in your source folder, and erase the contents of the file, and replace them with the following code.
+
+	//
+	//  GameCenterInteractor.swift
+	//  GameKitInteraction
+	//
+	//  Created by Stuart Breckenridge on 19/11/14.
+	//  Copyright (c) 2014 Stuart Breckenridge. All rights reserved.
+	//
+
+	import UIKit
+	import GameKit
+
+	protocol GameCenterInteractorNotifications
+	{
+	    func willSignIn()
+	    func didSignIn()
+	    func failedToSignInWithError(anError:NSError)
+	    func failedToSignIn()
+	}
+
+
+	class GameCenterInteractor: NSObject {
+	    
+	    // Public Variables
+	    let localPlayer = GKLocalPlayer.localPlayer()
+	    var delegate: GameCenterInteractorNotifications?
+	    var callingViewController: UIViewController?
+	    
+	    // Singleton
+	    class var sharedInstance : GameCenterInteractor {
+	        struct Static {
+	            static let instance : GameCenterInteractor = GameCenterInteractor()
+	        }
+	        return Static.instance
+	    }
+	    
+	    //MARK: 1 Check authentication status
+	    /**
+	    This is the public method that begins the authentication process for the local player.
+	    */
+	    func authenticationCheck()
+	    {
+	        if (self.localPlayer.authenticated == false)
+	        {
+	            //Authenticate the player
+	            println("The local player is not authenticated.")
+	            self.authenticateLocalPlayer()
+	        } else
+	        {
+	            println("The local player is authenticated")
+	            // Register the listener
+	            self.localPlayer.registerListener(self)
+	            
+	            // At this point you can download match data from Game Center.
+	        }
+	    }
+	    
+	    //MARK: 2 Authenticate the Player
+	    /**
+	    This is a private method to authenticate the local player with Game Center.
+	    */
+	    private func authenticateLocalPlayer()
+	    {
+	        self.delegate?.willSignIn()
+	        
+	        self.localPlayer.authenticateHandler = {(viewController : UIViewController!, error : NSError!) -> Void in
+	            
+	            if (viewController != nil)
+	            {
+	                dispatch_async(dispatch_get_main_queue(), {
+	                    self.showAuthenticationDialogueWhenReasonable(presentingViewController: self.callingViewController!, gameCenterController: viewController)
+	                })
+	            }
+	                
+	            else if (self.localPlayer.authenticated == true)
+	            {
+	                println("Player is Authenticated")
+	                self.localPlayer.registerListener(self)
+	                self.delegate?.didSignIn()
+	            }
+	                
+	            else
+	            {
+	                println("User Still Not Authenticated")
+	                self.delegate?.failedToSignIn()
+	            }
+	            
+	            if (error != nil)
+	            {
+	                println("Failed to sign in with error:\(error.localizedDescription).")
+	                self.delegate?.failedToSignInWithError(error)
+	                // Delegate can take necessary action. For example: present a UIAlertController with the error details.
+	            }
+	        }
+	    }
+	    
+	    //MARK: 3 Show Authentication Dialogue
+	    /**
+	    When appropriate, this function will be called and will present the Game Center login view controller.
+	    
+	    :param: presentingViewController The view controller that will present the game center view controller.
+	    :param: gameCenterController     The game center controller.
+	    */
+	    func showAuthenticationDialogueWhenReasonable(#presentingViewController:UIViewController, gameCenterController:UIViewController)
+	    {
+	        presentingViewController.presentViewController(gameCenterController, animated: true, completion: nil)
+	    }
+	}
+
+	extension GameCenterInteractor:GKLocalPlayerListener
+	{
+	    // Add functions for monitoring match changes.
+	}
+
+### 7.	
+Now it's time to add the code that authenticates the user into GameCenter. First things first, I want you to pick up your iPhone/iPod/iPad and press the home button. Now go to Settings->GameCenter->Developer and turn Sandbox on.
+
+
