@@ -303,3 +303,48 @@ Now is the time for you to take this code I've written and understand it. In you
 	
 Which is a method that you should have written in your class extension (remember that thing we did up above?) 
 
+setUpGameCenter() is a function that authenticates your user. What the lines     
+	
+	let gameCenterInteractor = GameCenterInteractor.sharedInstance
+    gameCenterInteractor.authenticationCheck()
+
+do is access the Singleton class that we created above (GameCenter Interactor). Don't know what a Singleton is? Don't worry too much, it'll be covered in a later tutorial. [If you're really curious, here's a link to some reading about Singletons.](https://thatthinginswift.com/singletons/)
+
+Once this code is functional, here's the popup that should appear when you run your game:
+![code](Screenshots/IMG_6857.jpg)
+
+If you're noticing that the game is crashing when you try to run the app, or that the GameCenter popup isn't appearing, try checking the console. You may need to sign into GameCenter on your device.
+
+
+### 9.
+Now we need to access the High Score table. Go to whichever scene you are deciding to show your  leaderboard in (in Seige, this scene is my Store.swift file) and make sure you have the code from the extension above. Now, all you need to do is call the showLeaderboard() method from that extension as shown below.
+
+	    func openGameCenter() {
+	        showLeaderboard()
+	    }
+	    
+	}
+
+	// MARK: Game Center Handling
+	extension Store: GKGameCenterControllerDelegate {
+    
+	    func showLeaderboard() {
+	        var viewController = CCDirector.sharedDirector().parentViewController!
+	        var gameCenterViewController = GKGameCenterViewController()
+	        gameCenterViewController.gameCenterDelegate = self
+	        viewController.presentViewController(gameCenterViewController, animated: true, completion: nil)
+	    }
+	    
+	    // Delegate methods
+	    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+	        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+	    }
+    
+	}
+
+I seriously hope for your sake you're not just blindly copying every piece of code. Does it work? Does your leaderboard look like this? If you're having trouble, check out my Store.swift file to see how I did it.
+![code](Screenshots/IMG_6858.jpg)
+
+Well, that was cool...but there's no scores. Let's start sending high scores to GameCenter!
+
+Head to your GameOver Scene.
