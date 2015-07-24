@@ -371,5 +371,11 @@ If the current score is higher than what is saved as the previous high score in 
 
 Here's where you'll have to do some more thinking. You'll have to make sure you load from your score singleton (or NSUserDefaults) and send that value into the scoreReporter variable, and then the GKScore.reportScores method will send the score off to GameCenter! Awesome.
 
+Now all you need to do is play your game, set a high score, and you'll see it reported in GameCenter!
+
+
+### 10.
+
+Did you like this tutorial? If so, please star the repo. Didn't like it? Tell me what I did wrong. If you want to see how to send challenges to friends or set up matchmaking, send me a tweet at twitter.com/_luke_warm and let me know!
 
 
