@@ -232,7 +232,7 @@ Next, go to File->New->File. Now select iOS Source->Swift File-> Next. Save the 
 	            if (viewController != nil)
 	            {
 	                dispatch_async(dispatch_get_main_queue(), {
-	                    self.showAuthenticationDialogueWhenReasonable(presentingViewController: self.callingViewController!, gameCenterController: viewController)
+	                    self.showAuthenticationDialogueWhenReasonable(presentingViewController: CCDirector.sharedDirector().parentViewController!, gameCenterController: viewController)
 	                })
 	            }
 	                
@@ -348,3 +348,28 @@ I seriously hope for your sake you're not just blindly copying every piece of co
 Well, that was cool...but there's no scores. Let's start sending high scores to GameCenter!
 
 Head to your GameOver Scene.
+
+First, you want to check to make sure that your user has set a new high score. For me, I'm using a method called checkForNewHighScores to check whether the data store in NSUserDefaults is higher than the current score. 
+    
+    func checkForNewHighScores(){
+        
+    }
+    
+If the current score is higher than what is saved as the previous high score in NSUserDefaults, i'll call the sharedInstance of my GameCenterInteractor class to call the reportHighScoreToGameCenter() Method.
+
+    func reportHighScoreToGameCenter(){
+        var scoreReporter = GKScore(leaderboardIdentifier: "YOUR LEADERBOARD IDENTIFIER GOES HERE")
+        scoreReporter.value = Int64(GameStateSingleton.sharedInstance.score)
+        var scoreArray: [GKScore] = [scoreReporter]
+        
+        GKScore.reportScores(scor4eArray, withCompletionHandler: {(error : NSError!) -> Void in
+            if error != nil {
+                println("Game Center: Score Submission Error")
+            }
+        })
+    }
+
+Here's where you'll have to do some more thinking. You'll have to make sure you load from your score singleton (or NSUserDefaults) and send that value into the scoreReporter variable, and then the GKScore.reportScores method will send the score off to GameCenter! Awesome.
+
+
+
