@@ -371,11 +371,11 @@ If the current score is higher than what is saved as the previous high score in 
 
 Here's where you'll have to do some more thinking. You'll have to make sure you load from your score singleton (or NSUserDefaults) and send that value into the scoreReporter variable, and then the GKScore.reportScores method will send the score off to GameCenter! Awesome.
 
+It's important to note that a GKScore only accepts numbers as a 64 Bit integer. That means if you're saving your scores as a Float or a Double, you'll run into some issues when you send your score to GameCenter. To get around this, you'll have to let them know you want your score represented as a double in iTunesConnect, and then convert your score to an Int by multiplying it by 100. On their end, the score will be converted back into a Double when they divide it by 100. Why does Apple do this seemingly arbitrary thing that causes us a great deal of agony? I don't know. It's just one of those things. Welcome to being an iOS developer!
+
 Now all you need to do is play your game, set a high score, and you'll see it reported in GameCenter!
 
 
 ### 10.
 
-Did you like this tutorial? If so, please star the repo. Didn't like it? Tell me what I did wrong. If you want to see how to send challenges to friends or set up matchmaking, send me a tweet at twitter.com/_luke_warm and let me know!
-
-
+Did you like this tutorial? If so, please star the repo. Didn't like it? Tell me what I did wrong. If you want to see how to send challenges to friends or set up matchmaking, send me a tweet at [http://twitter.com/_luke_warm](http://twitter.com/_luke_warm) and let me know!
